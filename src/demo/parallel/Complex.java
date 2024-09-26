@@ -44,7 +44,7 @@ package demo.parallel;
  * this sample code.</i>
  * @author Alexander Kouznetsov, Tristan Yan
  */
-public class Complex {
+public class    Complex {
     
     private double re;   // the real part
     private double im;   // the imaginary part
@@ -69,6 +69,22 @@ public class Complex {
         re += b.re;
         im += b.im;
         return this;
+    }
+
+    public Complex minus(Complex b) {
+        re -= b.re;
+        im -= b.im;
+        return this;
+    }
+
+    public Complex divide(Complex b) {
+        if (b.re == 0 && b.im == 0) {
+            throw new ArithmeticException("Division by zero");
+        }
+        double denominator = b.re * b.re + b.im * b.im;
+        double real = (this.re * b.re + this.im * b.im) / denominator;
+        double imag = (this.im * b.re - this.re * b.im) / denominator;
+        return new Complex(real, imag);
     }
 
     /**
